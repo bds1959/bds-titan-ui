@@ -25,8 +25,8 @@ jobs:
         run: npm install
 
       # Tests
-      - name: Run tests
-        run: npm test
+      #- name: Run tests
+      #  run: npm test
 
       # Configure Git
       - name: Git configuration
