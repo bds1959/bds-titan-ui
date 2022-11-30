@@ -1,6 +1,6 @@
 {
   "name": "vuexy-react-admin-dashboard",
-  "version": "6.4.0",
+  "version": "6.4.1",
   "private": false,
   "dependencies": {
     "@casl/ability": "5.2.2",
