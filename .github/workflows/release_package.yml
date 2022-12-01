@@ -104,9 +104,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
-      #generate changelog
-      - name: Changelog
-        uses: Bullrich/generate-release-changelog@master
-        id: Changelog
+      - name: generate Release notes
+        uses: actions/github-script@v4.0.2
         env:
-          REPO: ${{ github.repository }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            await github.request(`POST /repos/${{ github.repository }}/releases`, {
+              generate_release_notes: true
+            });
