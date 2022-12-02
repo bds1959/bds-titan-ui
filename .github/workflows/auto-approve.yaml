@@ -27,6 +27,5 @@ jobs:
 #         if: github.actor == 'dependabot[bot]'
         uses: andrewmusgrave/automatic-pull-request-review@0.0.5
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          event: APPROVE
+          repo-token:  ${{ secrets.MY_TOKEN }}
           body: 'Thank you 🎊'
