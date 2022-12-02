@@ -101,14 +101,6 @@ jobs:
           tag_name: ${{ env.NEW_VERSION }}
           body: ${{ steps.get-changelog.outputs.changelog }}
           prerelease: ${{ startsWith(github.event.inputs.release-type, 'pre') }}
+          generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-      - name: generate Release notes
-        uses: actions/github-script@v4.0.2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            await github.request(`POST /repos/${{ github.repository }}/releases`, {
-              generate_release_notes: true
-            });
