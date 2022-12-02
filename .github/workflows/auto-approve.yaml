@@ -1,31 +1,30 @@
-# name: Auto approve and merge PRs by dependabot
+name: Auto approve and merge PRs by dependabot
 
-# # Trigger the workflow on pull request
-# on:
-#   pull_request
+# Trigger the workflow on pull request
+on:
+  pull_request
 
-# jobs:
-#   autoapprove:
-#     name: Auto Approve a PR by dependabot 
-#     runs-on: ubuntu-latest 
-#     permissions:
-#       pull-requests: write
-#     steps:
-#       - name: Auto approve
-#         uses: hmarr/auto-approve-action@v2.0.0 
-#         with:
-#           github-token: ${{ secrets.MY_TOKEN }}
-#           review-message: "Auto approved automated PR"
-
-name: Automatic pull request review
-on: [pull_request]
 jobs:
-  automate-pullrequest-review:
-    runs-on: ubuntu-latest
+  autoapprove:
+    name: Auto Approve a PR by dependabot 
+    runs-on: ubuntu-latest 
+    permissions:
+      pull-requests: write
     steps:
-      - name: Approve pull request
-#         if: github.actor == 'dependabot[bot]'
-        uses: andrewmusgrave/automatic-pull-request-review@0.0.5
+      - name: Auto approve
+        uses: hmarr/auto-approve-action@v2.0.0 
         with:
-          repo-token:  ${{ secrets.MY_TOKEN }}
-          body: 'Thank you 🎊'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+# name: Automatic pull request review
+# on: [pull_request]
+# jobs:
+#   automate-pullrequest-review:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Approve pull request
+# #         if: github.actor == 'dependabot[bot]'
+#         uses: andrewmusgrave/automatic-pull-request-review@0.0.5
+#         with:
+#           repo-token:  ${{ secrets.MY_TOKEN }}
+#           body: 'Thank you 🎊'
