@@ -86,6 +86,7 @@ jobs:
           git push origin main:actions && git push origin main:actions --tags
       # Open PR
       - name: Create Pull Request
+        id: npm-publish
         uses: peter-evans/create-pull-request@v4
         with:
           commit-message: npm publish - open PR - added tag
@@ -95,11 +96,19 @@ jobs:
           labels: automated-pr, npm publish
           branch: actions
           delete-branch: true
-      # auto approve
+      # auto approve PR
       - name: Auto approve
-        uses: hmarr/auto-approve-action@v2.0.0 
+        uses: juliangruber/approve-pull-request-action@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          number: ${{ steps.npm-publish.output.pull-request-number }}
+      # auto merge PR
+      - name: Auto merge PR
+        uses: juliangruber/merge-pull-request-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          number: ${{ steps.npm-publish.output.pull-request-number }}
+          method: squash
 
       # Read version changelog
       - id: get-changelog
