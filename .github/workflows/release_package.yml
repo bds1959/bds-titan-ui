@@ -101,13 +101,13 @@ jobs:
         uses: juliangruber/approve-pull-request-action@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          number: ${{ steps.npm-publish.output.pull-request-number }}
+          number: ${{ steps.npm-publish.outputs.pull-request-number }}
       # auto merge PR
       - name: Auto merge PR
         uses: juliangruber/merge-pull-request-action@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          number: ${{ steps.npm-publish.output.pull-request-number }}
+          number: ${{ steps.npm-publish.outputs.pull-request-number }}
           method: squash
 
       # Read version changelog
