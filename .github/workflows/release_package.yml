@@ -110,37 +110,37 @@ jobs:
           number: ${{ steps.npm-publish.outputs.pull-request-number }}
           method: squash
 ###################################################################################
-      - name: get previous tag
-        run: |
-          echo "PRV_TAG=$(git tag -l | sort -V | tail -2 | head -n 1)" >> $GITHUB_ENV
+#       - name: get previous tag
+#         run: |
+#           echo "PRV_TAG=$(git tag -l | sort -V | tail -2 | head -n 1)" >> $GITHUB_ENV
         
-      - name: Create Release
-        uses: ntltd/release-generator@master
-        with:
-          baseTag: ${{ env.PRV_TAG }}
-          releaseTag: ${{ env.NEW_VERSION }}
-          templatePath: RELEASE_DRAFT/default.md
-          token: ${{ github.token }}
-
-
-#       - name: Changelog
-#         uses: Bullrich/generate-release-changelog@master
-#         id: Changelog
-#         env:
-#           REPO: ${{ github.repository }}
-          
 #       - name: Create Release
-#         id: create_release
-#         uses: actions/create-release@latest
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+#         uses: ntltd/release-generator@master
 #         with:
-#           tag_name: ${{ env.NEW_VERSION }}
-#           release_name: Release ${{ env.NEW_VERSION }}
-#           body: |
-#             ${{ steps.Changelog.outputs.changelog }}
-#           draft: false
-#           prerelease: false
+#           baseTag: ${{ env.PRV_TAG }}
+#           releaseTag: ${{ env.NEW_VERSION }}
+#           templatePath: RELEASE_DRAFT/default.md
+#           token: ${{ github.token }}
+
+
+      - name: Changelog
+        uses: Bullrich/generate-release-changelog@master
+        id: Changelog
+        env:
+          REPO: ${{ github.repository }}
+          
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ env.NEW_VERSION }}
+          release_name: Release ${{ env.NEW_VERSION }}
+          body: |
+            ${{ steps.Changelog.outputs.changelog }}
+          draft: false
+          prerelease: false
 #######################################################################################
       # Read version changelog
 #       - id: get-changelog
