@@ -111,20 +111,20 @@ jobs:
           method: squash
 
       # Read version changelog
-      - id: get-changelog
-        name: Get version changelog
-        uses: superfaceai/release-changelog-action@v1
-        with:
-          path-to-changelog: CHANGELOG.md
-          version: ${{ env.NEW_VERSION }}
-          operation: read
+#       - id: get-changelog
+#         name: Get version changelog
+#         uses: superfaceai/release-changelog-action@v1
+#         with:
+#           path-to-changelog: CHANGELOG.md
+#           version: ${{ env.NEW_VERSION }}
+#           operation: read
 
       # Update GitHub release with changelog
       - name: Update GitHub release documentation
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ env.NEW_VERSION }}
-          body: ${{ steps.get-changelog.outputs.changelog }}
+          #body: ${{ steps.get-changelog.outputs.changelog }}
           prerelease: ${{ startsWith(github.event.inputs.release-type, 'pre') }}
           generate_release_notes: true
           append_body: true
