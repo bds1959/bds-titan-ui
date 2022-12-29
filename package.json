@@ -1,6 +1,6 @@
 {
   "name": "banyancloud_ui_test",
-  "version": "10.0.7",
+  "version": "11.0.0",
   "private": false,
   "dependencies": {
     "@casl/ability": "5.2.2",
