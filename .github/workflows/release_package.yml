@@ -119,7 +119,7 @@ jobs:
         with:
           baseTag: ${{ env.PRV_TAG }}
           releaseTag: ${{ env.NEW_VERSION }}
-          templatePath: CHANGELOG.md
+          templatePath: RELEASE_DRAFT/default.md
           token: ${{ github.token }}
 
 
