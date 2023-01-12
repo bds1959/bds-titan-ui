@@ -1,12 +1,11 @@
 name: Auto Pull Request, Approve, and Merge
 on:
   push:
-    branches: 
-      - actions
+    branches:
+      - deploy
 jobs:
   create_pull_request:
     runs-on: ubuntu-latest
-
     steps:
       # Checkout project repository
       - name: Checkout
@@ -21,7 +20,7 @@ jobs:
           body: npm publish - open PR
           base: main
           labels: automated-pr, npm publish
-          branch: actions
+          branch: deploy
           delete-branch: true
       # auto approve PR
       - name: Auto approve
