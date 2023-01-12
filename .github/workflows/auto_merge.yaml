@@ -1,7 +1,8 @@
 name: Auto Pull Request, Approve, and Merge
 on:
   push:
-    branches: actions
+    branches: 
+      - actions
 jobs:
   create_pull_request:
     runs-on: ubuntu-latest
