@@ -1,0 +1,33 @@
+name: Auto Pull Request, Approve, and Merge
+on:
+  push:
+    branches:
+      - deployment
+jobs:
+  create_pull_request:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Create pull request
+      id: create_pull_request
+      uses: peter-evans/create-pull-request@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: 'Automatically created pull request'
+        title: 'Auto Pull Request'
+        head: deployment
+        base: main
+        labels: 'auto-merge'
+    - name: Approve pull request
+      if: steps.create_pull_request.outputs.pull-request-number
+      uses: peter-evans/approve-pull-request@v2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        pull-request-number: ${{ steps.create_pull_request.outputs.pull-request-number }}
+    - name: Merge pull request
+      if: steps.create_pull_request.outputs.pull-request-number
+      uses: peter-evans/merge-pull-request@v2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        pull-request-number: ${{ steps.create_pull_request.outputs.pull-request-number }}
