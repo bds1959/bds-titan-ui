@@ -18,7 +18,6 @@ RUN npm install
 
 RUN npm run build
 
-#EXPOSE 3000
 
 CMD [ "npm", "start" ]
 #CMD [ "serve", "-s", "-l", "tcp://0.0.0.0:8080", "build" ]
