@@ -15,7 +15,7 @@ jobs:
       uses: actions/create-pull-request@v2
       with:
         title: 'Auto Pull Request'
-        head: branch-to-merge
+        head: actions
         base: main
         labels: 'auto-merge'
         approve: true
