@@ -22,7 +22,6 @@ RUN npm run build
 
 CMD [ "npm", "start" ]
 #CMD [ "serve", "-s", "-l", "tcp://0.0.0.0:8080", "build" ]
-# Stage 2
 
 FROM nginx:alpine
 
